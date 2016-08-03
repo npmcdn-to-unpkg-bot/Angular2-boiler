@@ -1,0 +1,14 @@
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li *ngFor="let opt of drop.options">
+            <a routerLink="/crisis-center" routerLinkActive="active" class="options">
+                <!--  <span *ngIf="opt.icon" [class]="opt.icon" aria-hidden="true"></span>
+        {{opt.left_text}} -->
+                <div class="container-fluid">
+                    <span *ngIf="opt.icon" [class]="opt.icon" class="col-xs-1" aria-hidden="true" style="float:left"></span>
+                    <div class="col-xs-5">{{opt.left_text}}</div>
+                    <div class="col-xs-5">{{opt.right_text}}</div>
+                    <span *ngIf="opt.sub_options==true && opt.sub_options_direction=='left' " class="glyphicon glyphicon-chevron-right" style="float:right; right:0px;"></span>
+                </div>
+            </a>
+        </li>
+    </ul>

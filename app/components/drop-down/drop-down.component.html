@@ -1,0 +1,60 @@
+<div [class.dropdown]="!drop.dropup" [class.dropup]="drop.dropup" (click)="clicked=false;subClicked=false">
+    <button class="btn btn-default dropdown-toggle" id="dropdownMenu1" [attr.style]="drop.style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span *ngIf="drop.text && !drop.icon">{{drop.text}}</span>
+        <span *ngIf="drop.icon && !drop.text" [class]="drop.icon" aria-hidden="true"></span>
+        <span class="caret" *ngIf="drop.text"></span>
+    </button>
+    <!-- drop down menu start -->
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li *ngFor="let opt of drop.options" style="position:relative" class="dropdown-submenu" (click)="event_prevent($event,opt.has_sub_options)">
+            <!-- sub header -->
+            <span class="dropdown-header" *ngIf="opt.header">{{opt.header}}</span>
+            <!-- sub header end -->
+            <a routerLink="/crisis-center" routerLinkActive="active" id="dropdownMenu2" class="options dropdown-toggle" (click)="open_suboptions(opt.has_sub_options)">
+                <div class="container-fluid">
+                    <!-- dropdown menu icon left -->
+                    <span *ngIf="opt.icon" [class]="opt.icon" class="col-xs-1" aria-hidden="true" style="float:left"></span>
+                    <!-- dropdown menu text -->
+                    <div class="col-xs-5">{{opt.left_text}}</div>
+                    <!-- dropdown menu shortcut -->
+                    <div class="col-xs-5">{{opt.right_text}}</div>
+                    <!-- right arrow -->
+                    <span *ngIf="opt.has_sub_options==true && opt.sub_options_direction=='left' " class="glyphicon glyphicon-chevron-right" style="float:right; right:0px;"></span>
+                </div>
+            </a>
+            <!-- first level sub menu -->
+            <!-- .............................................................................................- -->
+            <ul class="dropdown-menu submenu" *ngIf="opt.sub_options" [class.block]="clicked">
+                <li *ngFor="let opts of opt.sub_options" style="position:relative" class="dropdown-submenu" (click)="event_prevent($event,opts.has_sub_options)">
+                    <span class="dropdown-header" *ngIf="opts.header">{{opts.header}}</span>
+                    <a routerLink="/crisis-center" routerLinkActive="active" id="dropdownMenu2" class="options dropdown-toggle" (click)="open_subSuboptions(opts.has_sub_options)">
+                        <div class="container-fluid">
+                            <span *ngIf="opts.icon" [class]="opts.icon" class="col-xs-1" aria-hidden="true" style="float:left"></span>
+                            <div class="col-xs-5">{{opts.left_text}}</div>
+                            <div class="col-xs-5">{{opts.right_text}}</div>
+                            <span *ngIf="opts.has_sub_options==true && opts.sub_options_direction=='left' " class="glyphicon glyphicon-chevron-right" style="float:right; right:0px;"></span>
+                        </div>
+                    </a>
+                    <!-- .................................................................................................... -->
+                    <!-- second level sub menu -->
+                    <!-- ......................................................................................................... -->
+                    <ul class="dropdown-menu submenu" *ngIf="opts.sub_options" [class.block]="subClicked">
+                        <li *ngFor="let optns of opts.sub_options" style="position:relative" class="dropdown-submenu" (click)="event_prevent($event,optns.has_sub_options)">
+                            <span class="dropdown-header" *ngIf="optns.header">{{optns.header}}</span>
+                            <a routerLink="/crisis-center" routerLinkActive="active" id="dropdownMenu2" class="options dropdown-toggle " (click)="open_subSuboptions(optns.has_sub_options)">
+                                <div class="container-fluid">
+                                    <span *ngIf="opts.icon" [class]="opts.icon" class="col-xs-1" aria-hidden="true" style="float:left"></span>
+                                    <div class="col-xs-5">{{optns.left_text}}</div>
+                                    <div class="col-xs-5">{{optns.right_text}}</div>
+                                    <span *ngIf="optns.has_sub_options==true && optns.sub_options_direction=='left' " class="glyphicon glyphicon-chevron-right" style="float:right; right:0px;"></span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- .......................................................................................................... -->
+                </li>
+            </ul>
+            <hr role="separator" *ngIf="opt.separator" class="divider" style="border-top:none" />
+        </li>
+    </ul>
+</div>

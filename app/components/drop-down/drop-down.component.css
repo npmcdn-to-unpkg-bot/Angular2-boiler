@@ -1,0 +1,14 @@
+.options {
+    cursor: pointer;
+    padding: 10px 0px 10px 20px;
+}
+
+.submenu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+.block{
+	display: table;
+}
+
